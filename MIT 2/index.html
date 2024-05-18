@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Contact Manager</title>
+    <style>
+        .cards{
+            height: 80px;
+            width: 600px;
+            background-color: bisque;
+            margin-left: 390px;
+            border-radius: 10px;
+            box-shadow: 1px 2px 10px palevioletred;
+            /* display: none; */
+        }
+        .cards span{
+            margin-left: 40px;
+        }
+        .cards label{
+            margin-left: 40px;
+        }
+        .cards button{
+            height: 40px;
+            width: 70px;
+            background-color: transparent;
+            border: 2px solid black;
+            color: rgb(140, 55, 55);
+            font-weight: bold;
+            margin-left: 470px;
+            position: relative;
+            top: -30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="heading">
+        <h1>Contact Manager</h1>
+    </div>
+    <div class="Container">
+        <br><span>Name</span>
+        <br><input type="text" name="name" id="userName" placeholder="Enter your name...">
+        <br><br><span>Email</span>
+        <br><input type="email" name="email" id="emailId" placeholder="abc@gmail.com">
+        <br><br><button onclick="Submit()">Submit</button>
+    </div>
+    <div id="display"></div>
+
+
+    <script>
+        var userName=document.getElementById("userName")
+        var emailId=document.getElementById("emailId")
+        var token=localStorage.getItem("storeValue")
+        var storeValue
+        if(storeValue==null){
+            storeValue=[]
+        }
+        else{
+            storeValue=JSON.parse(token)
+        }
+        function Submit(){
+             var userName=document.getElementById("userName")
+             var emailId=document.getElementById("emailId")
+              
+            
+             storeValue.push({
+                name:userName.value,
+                email:emailId.value
+             })
+
+             
+             display() 
+        }localStorage.setItem("storeValue",JSON.stringify(storeValue))
+        function display(){
+            var userName=document.getElementById("userName").value
+             var emailId=document.getElementById("emailId").value
+             var display=document.getElementById("display")
+            return display.innerHTML=`<div class="cards">
+                <span>${userName}</span>
+                <br><label>${emailId}</label>
+                <button onclick="Delete()">Delete</button>
+                </div>`
+                // display.style.display='block'
+                location.reload
+            
+                
+
+              storeValue.push(token)  
+                
+        }function Delete(){
+                    document.querySelector(".cards").style.display='none'
+                }
+       
+        
+        // storeValue.append(token)
+        
+    </script>
+</body>
+</html>
